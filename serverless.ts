@@ -16,12 +16,12 @@ const serverlessConfiguration: AWS & Lift = {
     },
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
-      APP_TABLE_NAME: '${construct:appTable.tableName}',
+      // uncomment if deploying to AWS
+      // APP_TABLE_NAME: '${construct:appTable.tableName}',
       ALCHEMY_API_KEY: 'swSHMDWJam8GmCpX7OGOw8ep-2iXTs-C',
       NODE_OPTIONS: '--enable-source-maps --stack-trace-limit=1000',
     },
   },
-  // import the function via paths
   functions: functions,
   package: { individually: true },
   constructs: {

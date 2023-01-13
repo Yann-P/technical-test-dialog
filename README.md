@@ -25,18 +25,18 @@ To get collection information you should use [Alchemy API](https://docs.alchemy.
 
 2. Create NFT collection
 
-The goal of this part is to create a simple POST route to create an nft collection resource with the following attributes: 
+The goal of this part is to create a simple POST route to create an nft collection resource with the following attributes in our DynamoDB table: 
 
 - contractAddress (required)
-- name
+- collectionName
 - image
 - type ("ERC-721" or "ERC-1155")
 
 3. Create NFT collection details - Part 2
 
-Implement a new POST route to create a NFT collection. The body should contain only a contractAddress and fetch other information from Alchemy :
+Implement a new POST route to create a NFT collection in our DynamoDB table. The body should contain only a contractAddress and fetch other information from Alchemy :
 
-- name
+- collectionName
 - image
 - type ("ERC-721" or "ERC-1155")
 
@@ -90,11 +90,11 @@ The project code base is mainly located within the `src` folder. This folder is 
 │   │   │   ├── index.ts        # `createCollection` lambda Serverless configuration
 │   │   │   ├── mock.json       # `createCollection` lambda input parameter, if any, for local invocation
 │   │   │   └── schema.ts       # `createCollection` lambda input event JSON-Schema
-│   │   ├── getNftCollectionDetail
-│   │   │   ├── handler.ts      # `getNftCollectionDetail` lambda source code
-│   │   │   ├── index.ts        # `getNftCollectionDetail` lambda Serverless configuration
-│   │   │   ├── mock.json       # `getNftCollectionDetail` lambda input parameter, if any, for local invocation
-│   │   │   └── schema.ts       # `getNftCollectionDetail` lambda input event JSON-Schema
+│   │   ├── getNftCollectionDetails
+│   │   │   ├── handler.ts      # `getNftCollectionDetails` lambda source code
+│   │   │   ├── index.ts        # `getNftCollectionDetails` lambda Serverless configuration
+│   │   │   ├── mock.json       # `getNftCollectionDetails` lambda input parameter, if any, for local invocation
+│   │   │   └── schema.ts       # `getNftCollectionDetails` lambda input event JSON-Schema
 │   │   │
 │   │   └── index.ts            # Import/export of all lambda configurations
 │   │
@@ -135,12 +135,17 @@ Depending on your preferred package manager, follow the instructions below to de
 - Run `yarn` to install the project dependencies
 - Run `yarn sls deploy` to deploy this stack to AWS
 
+### DynamoDB table name
+
+If you deploy to AWS, you will need to give the correct `APP_TABLE_NAME` env var in `src/models/Collection.ts`. In `serverless.ts` uncomment line 20.
+In `src/models/Collection.ts`, uncomment line 39.
+
 ### Locally
 
 In order to test the getNftCollectionDetail function locally, run the following command:
 
-- `npx sls invoke local -f getNftCollectionDetail --path src/functions/getNftCollectionDetail/mock.json` if you're using NPM
-- `yarn sls invoke local -f getNftCollectionDetail --path src/functions/getNftCollectionDetail/mock.json` if you're using Yarn
+- `npx sls invoke local -f getNftCollectionDetails --path src/functions/getNftCollectionDetails/mock.json` if you're using NPM
+- `yarn sls invoke local -f getNftCollectionDetails --path src/functions/getNftCollectionDetails/mock.json` if you're using Yarn
 
 Check the [sls invoke local command documentation](https://www.serverless.com/framework/docs/providers/aws/cli-reference/invoke-local/) for more information.
 

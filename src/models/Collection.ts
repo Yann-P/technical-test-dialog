@@ -35,6 +35,7 @@ const MySchema = {
 const table = new Table({
   client: new Dynamo({client: ddb}),
   name: 'appTable',
+  // if you deploy to AWS
   // name: process.env.APP_TABLE_NAME,
   schema: MySchema,
 })
